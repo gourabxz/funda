@@ -1,0 +1,61 @@
+.left_pan {
+    background-color: #008adb;
+    height: 160px;
+}
+
+.left_head,
+.left_subHead {
+    margin: 0;
+    text-align: center;
+    color: #fff;
+}
+
+.left_p {
+    color: #fced4a;
+    text-align: center;
+    padding-top: 10px;
+}
+
+@media only screen and (min-width: 768px) {
+    .form_head {
+        position: absolute;
+        top: -20px;
+        background-color: #24aef3;
+        padding: 8px;
+        color: #fff;
+        border-radius: 15px
+    }
+    .left_pan {
+        background-color: #008adb;
+        height: 100vh;
+    }
+
+    .right_pan {}
+    .right_pan > .container {
+        margin-top: 10%;
+        background-color: #ffffff;
+        padding: 30px;
+        width: 400px;
+
+
+    }
+    .left_container {
+        margin-top: 30vh;
+    }
+
+}
+
+
+.progbar {
+    opacity: 0;
+}
+
+.main_grid {
+    margin: 0 !important;
+}
+
+
+
+.form_container {
+    width: 400px !important
+}
