@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="lib/semantic.min.css">
+    <link rel="stylesheet" href="css/css.css">
+    <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase.js"></script>
+    <title>Document</title>
+</head>
+
+<body class="body">
+    <!--   dimmer-->
+    <div class="ui page dimmer">
+        <div class="content">
+
+            <div class="center dimmer_content">
+                <h1 style="font-size: 100px"><i class="check circle outline icon"></i></h1>
+                <h1 class="hello_name">Hello</h1>
+                <p>your assignment has been submited successfully</p>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="ui stackable grid main_grid">
+        <!--       Left side panel-->
+        <div class="six wide column left_pan">
+            <div class="left_container">
+                <h4 class="left_subHead">Computer fundamnetal</h4>
+                <h1 class="left_head">Assignment</h1>
+                <h4 class="left_subHead">online submition</h4>
+
+                <p class="left_p">Enter your name and university ID in the text input, slect your program, upload the c program code file and click submit.</p>
+            </div>
+        </div>
+
+
+
+        <!--        Right side panel-->
+        <div class="ten wide column right_pan">
+            <div class="ui container">
+
+                <div class="ui container form_container">
+                    <form class="ui form">
+                        <div class="field">
+                            <label>Name</label>
+                            <input class="name xinput" type="text" name="first-name" placeholder="Name">
+                        </div>
+                        <div class="field">
+                            <label>ID number</label>
+                            <input class="id xinput" type="number" name="last-name" placeholder="ID number">
+                        </div>
+
+
+                        <!--            Radio button-->
+                        <div class="inline fields">
+                            <label>Program</label>
+                            <div class="field">
+                                <div class="ui radio checkbox check" prog="CSE">
+                                    <input type="radio" name="frequency" checked="checked">
+                                    <label>CSE</label>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="ui radio checkbox check" prog="BST">
+                                    <input type="radio" name="frequency">
+                                    <label>BST</label>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="ui radio checkbox check" prog="EEE">
+                                    <input type="radio" name="frequency">
+                                    <label>EEE</label>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="field">
+                            <label>Select file</label>
+                            <input id="fileButton" class="file_input" type="file" name="last-name">
+                        </div>
+                        <div class="ui indicating progress progbar">
+                            <div class="bar"></div>
+                            <div class="label proglabel">Uploading...</div>
+                        </div>
+                    </form>
+
+                    <br>
+                    <button class="ui button primary disabled submit" type="submit">Submit</button>
+
+
+
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+
+
+    <!--
+    <p class="pera">not working</p>
+    <progress value="0" max="100" id="uploader">0%</progress>
+    <input type="file" value="upload" id="fileButton"/>
+-->
+
+
+
+
+
+
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="lib/semantic.min.js"></script>
+    <script src="js/js.js"></script>
+</body>
+</html>
