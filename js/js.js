@@ -1,54 +1,5 @@
-//$(document).ready(function(){
-//         // Initialize Firebase
-//  var config = {
-//    apiKey: "AIzaSyDJ1Swa6le7M-IMSj70Y5-swmfWutlPvJw",
-//    authDomain: "assignment-f12ad.firebaseapp.com",
-//    databaseURL: "https://assignment-f12ad.firebaseio.com",
-//    projectId: "assignment-f12ad",
-//    storageBucket: "assignment-f12ad.appspot.com",
-//    messagingSenderId: "766722529393"
-//  };
-//  firebase.initializeApp(config);
-//    
-//    var uploader = document.getElementById('uploader');
-//    var fileButton = document.getElementById('fileButton');
-//    
-//    //listen for file selection
-//    fileButton.addEventListener('change', function(e) {
-//        console.log('ss');
-//        var file = e.target.files[0];
-//        var storageRef = firebase.storage().ref('codes/'+file.name);
-//        
-//        var task = storageRef.put(file);
-//        
-//        task.on('state_changed',
-//        function progress(snapshot){
-//            var percentage = (snapshot.bytesTransferred/snapshot.totalBytes)*100;
-//           uploader.value = percentage;
-//            $('.pera').text(parseInt(percentage));
-//        },
-//        function error(err) {
-//            
-//        },
-//        function complete() {
-//            
-//        });
-//        
-//        
-//        
-//        
-//        
-//        // Get the download URL
-//storageRef.getDownloadURL().then(function(url) {
-//  console.log(url);
-//});
-//        
-//    });
-//    
-//});
-
 $(document).ready(function () {
-    var fileUrl = "null";
+    var fileUrl = [];
 
     // Initialize Firebase
     var config = {
@@ -64,47 +15,74 @@ $(document).ready(function () {
 
     $('.ui.checkbox').checkbox();
     $('.progbar').progress();
-    prog = 'CSE';
+    department = 'CSE';
     $('.check').click(function () {
-        prog = $(this).attr('prog');
+        department = $(this).attr('department');
     });
 
 
     var fileButton = document.getElementById('fileButton');
 
-    //listen for file selection
+
+    //Listen for file selection
     fileButton.addEventListener('change', function (e) {
-        var random = Math.random();
-        var file = e.target.files[0];
+        //Get files
+        for (var i = 0; i < e.target.files.length; i++) {
+            var Cfile = e.target.files[i];
 
-        var storageRef = firebase.storage().ref('codes/' + random + file.name);
-        var task = storageRef.put(file);
-
-        task.on('state_changed',
-            function progress(snapshot) {
-                $('.progbar').css("opacity", "1");
-                var percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                $('.progbar').progress({
-                    percent: parseInt(percentage)
-                });
-                $('.proglabel').text(parseInt(percentage) + "%");
-            },
-            function error(err) {
-                $('.proglabel').text("Error uploading file");
-            },
-            function complete() {
-                $('.proglabel').text("Upload Completed");
-                // Get the download URL
-                storageRef.getDownloadURL().then(function (url) {
-                    console.log(url);
-                    fileUrl = url;
-                    $('.submit').removeClass('disabled');
-                });
-            });
+            upload(Cfile);
 
 
+        }
+        fileLength = e.target.files.length;
+        uploaded = 0;
 
+        console.log(fileLength);
     });
+    var random = Math.random();
+    //Handle waiting to upload each file using promise
+    function upload(Cfile) {
+        return new Promise(function (resolve, reject) {
+            var storageRef = firebase.storage().ref('codes/' + random + Cfile.name);
+
+            //Upload file
+            var task = storageRef.put(Cfile);
+
+            //Update progress bar
+            task.on('state_changed',
+                function progress(snapshot) {
+                    $('.progbar').css("opacity", "1");
+                    var percentage = snapshot.bytesTransferred / snapshot.totalBytes * 100;
+                    $('.progbar').progress({
+                        percent: parseInt(percentage)
+                    });
+                    $('.proglabel').text(parseInt(percentage) + "%");
+                },
+                function error(err) {
+
+                },
+                function complete() {
+                    // Get the download URL
+                    var downloadURL = task.snapshot.downloadURL;
+                    console.log(downloadURL);
+                    fileUrl.push(downloadURL);
+                    $('.proglabel').text("Upload Completed");
+                    var progText = $('.proglabel').text();
+                    uploaded = uploaded + 1;
+                    if (uploaded == fileLength) {
+                        $('.submit').removeClass('disabled');
+                    } else {
+                        $('.submit').addClass('disabled');
+                    }
+
+                }
+            );
+
+        });
+    }
+
+
+
     var database = firebase.database();
     $('.submit').click(function () {
         stdName = $('.name').val();
@@ -114,20 +92,30 @@ $(document).ready(function () {
             var Data = {
                 name: $('.name').val(),
                 id: $('.id').val(),
-                program: prog,
+                department: department,
                 filelink: fileUrl
             }
             console.log(Data);
 
-            firebase.database().ref('student/' + stdName + stdID + '/').set(Data);
+
+            if (department == "CSE") {
+                firebase.database().ref('student/cse/' + stdName + stdID + '/').set(Data);
+            } else if (department == "BST") {
+                firebase.database().ref('student/bst/' + stdName + stdID + '/').set(Data);
+            } else if (department == "EEE") {
+                firebase.database().ref('student/eee/' + stdName + stdID + '/').set(Data);
+            } else {
+                firebase.database().ref('student/error/' + stdName + stdID + '/').set(Data);
+            }
             $('.hello_name').text(stdName + ",");
             $('.dimmer').dimmer('show');
             $('.submit').addClass('disabled');
 
-            $('.fileButton').val('');
+            $('#fileButton').val(null);
             $('.name').val('');
             $('.id').val('');
-            $('.fileButton').val('');
+
+            fileUrl = [];
         } else {
             alert("Please enter your name and id");
         }
