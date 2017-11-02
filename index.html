@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="./lib/semantic.min.css">
-    <link rel="stylesheet" href="./css/css.css">
+    <link rel="stylesheet" href="lib/semantic.min.css">
+    <link rel="stylesheet" href="css/css.css">
     <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase.js"></script>
-    <title>Assignment submission</title>
+    <title>Document</title>
 </head>
 
 <body class="body">
@@ -32,7 +32,7 @@
                 <h1 class="left_head">Assignment</h1>
                 <h4 class="left_subHead">online submition</h4>
 
-                <p class="left_p">Enter your name and university ID in the text input, slect your program, upload the c program code file and click submit.</p>
+                <p class="left_p">Enter your name and university ID in the text input, slect your department, upload the c program code files and click submit.</p>
             </div>
         </div>
 
@@ -56,21 +56,21 @@
 
                         <!--            Radio button-->
                         <div class="inline fields">
-                            <label>Program</label>
+                            <label>Department</label>
                             <div class="field">
-                                <div class="ui radio checkbox check" prog="CSE">
+                                <div class="ui radio checkbox check" department="CSE">
                                     <input type="radio" name="frequency" checked="checked">
                                     <label>CSE</label>
                                 </div>
                             </div>
                             <div class="field">
-                                <div class="ui radio checkbox check" prog="BST">
+                                <div class="ui radio checkbox check" department="BST">
                                     <input type="radio" name="frequency">
                                     <label>BST</label>
                                 </div>
                             </div>
                             <div class="field">
-                                <div class="ui radio checkbox check" prog="EEE">
+                                <div class="ui radio checkbox check" department="EEE">
                                     <input type="radio" name="frequency">
                                     <label>EEE</label>
                                 </div>
@@ -80,7 +80,7 @@
 
                         <div class="field">
                             <label>Select file</label>
-                            <input id="fileButton" class="file_input" type="file" name="last-name">
+                            <input id="fileButton" class="file_input" type="file" name="last-name" multiple>
                         </div>
                         <div class="ui indicating progress progbar">
                             <div class="bar"></div>
@@ -116,8 +116,8 @@
 
 
 
-    <script src="./js/jquery-3.2.1.min.js"></script>
-    <script src="./lib/semantic.min.js"></script>
-    <script src="./js/js.js"></script>
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="lib/semantic.min.js"></script>
+    <script src="js/js.js"></script>
 </body>
 </html>
