@@ -1,0 +1,30 @@
+.itemSeg > .segment {
+    cursor: pointer;
+}
+
+.close {
+    float: right
+}
+
+.fileHolder {
+    position: relative;
+    max-width: 400px;
+    margin: 0 auto;
+    min-height: 40px;
+    background-color: #0088ff;
+    margin-bottom: 2px;
+    padding-top: 2px;
+    padding-left: 4px;
+    border-radius: 4px;
+    color: #ffffff;
+}
+
+.fileHolder > button {
+    position: absolute;
+    right: 0;
+    top: 2px
+}
+
+.fileHolder > p {
+    max-width: 250px
+}
