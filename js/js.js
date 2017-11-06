@@ -27,17 +27,21 @@ $(document).ready(function () {
     //Listen for file selection
     fileButton.addEventListener('change', function (e) {
         //Get files
-        for (var i = 0; i < e.target.files.length; i++) {
-            var Cfile = e.target.files[i];
+        try {
+            for (var i = 0; i < e.target.files.length; i++) {
+                var Cfile = e.target.files[i];
 
-            upload(Cfile);
+                upload(Cfile);
 
 
+            }
+            fileLength = e.target.files.length;
+            uploaded = 0;
+
+            console.log(fileLength);
+        } catch (err) {
+            alert("Network error. Try again later");
         }
-        fileLength = e.target.files.length;
-        uploaded = 0;
-
-        console.log(fileLength);
     });
     var random = Math.random();
     //Handle waiting to upload each file using promise
@@ -59,7 +63,7 @@ $(document).ready(function () {
                     $('.proglabel').text(parseInt(percentage) + "%");
                 },
                 function error(err) {
-
+                    alert("Something went wrong. Please reload the page and try again")
                 },
                 function complete() {
                     // Get the download URL
@@ -85,39 +89,44 @@ $(document).ready(function () {
 
     var database = firebase.database();
     $('.submit').click(function () {
-        stdName = $('.name').val();
-        stdID = $('.id').val();
+        try {
+            name = $('.name').val();
+            stdName = name.replace(/[^\w\s]/gi, '');
+            stdID = $('.id').val();
 
-        if (!$('.name').val().length == 0 && !$('.id').val().length == 0) {
-            var Data = {
-                name: $('.name').val(),
-                id: $('.id').val(),
-                department: department,
-                filelink: fileUrl
-            }
-            console.log(Data);
+            if (!$('.name').val().length == 0 && !$('.id').val().length == 0) {
+                var Data = {
+                    name: $('.name').val(),
+                    id: $('.id').val(),
+                    department: department,
+                    filelink: fileUrl
+                }
+                console.log(Data);
 
 
-            if (department == "CSE") {
-                firebase.database().ref('student/cse/' + stdName + stdID + '/').set(Data);
-            } else if (department == "BST") {
-                firebase.database().ref('student/bst/' + stdName + stdID + '/').set(Data);
-            } else if (department == "EEE") {
-                firebase.database().ref('student/eee/' + stdName + stdID + '/').set(Data);
+                if (department == "CSE") {
+                    firebase.database().ref('student/cse/' + stdName + stdID + '/').set(Data);
+                } else if (department == "BST") {
+                    firebase.database().ref('student/bst/' + stdName + stdID + '/').set(Data);
+                } else if (department == "EEE") {
+                    firebase.database().ref('student/eee/' + stdName + stdID + '/').set(Data);
+                } else {
+                    firebase.database().ref('student/error/' + stdName + stdID + '/').set(Data);
+                }
+                $('.hello_name').text(stdName + ",");
+                $('.dimmer').dimmer('show');
+                $('.submit').addClass('disabled');
+
+                $('#fileButton').val(null);
+                $('.name').val('');
+                $('.id').val('');
+
+                fileUrl = [];
             } else {
-                firebase.database().ref('student/error/' + stdName + stdID + '/').set(Data);
+                alert("Please enter your name and id");
             }
-            $('.hello_name').text(stdName + ",");
-            $('.dimmer').dimmer('show');
-            $('.submit').addClass('disabled');
-
-            $('#fileButton').val(null);
-            $('.name').val('');
-            $('.id').val('');
-
-            fileUrl = [];
-        } else {
-            alert("Please enter your name and id");
+        } catch (err) {
+            alert("Network error. Please try again later")
         }
 
     });
