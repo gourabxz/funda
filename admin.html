@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+
+    <link rel="stylesheet" href="lib/semantic.min.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase.js"></script>
+    <title>Admin panel</title>
+</head>
+
+<body>
+
+    <!--   MODAL START-->
+    <div class="ui modal">
+        <div class="header modalName">Assignment files <button class="ui button close red">Close</button></div>
+        <div class="scrolling content">
+            <div class="scrollDiv">
+                <p class="fileHolder">file 1: <button class="ui button downBtn">Download</button></p>
+
+            </div>
+        </div>
+    </div>
+    <!--    NODAL END-->
+    <div class="ui top attached tabular menu">
+        <a class="item" data-tab="first">CSE</a>
+        <a class="item" data-tab="second">BST</a>
+        <a class="item" data-tab="third">EEE</a>
+    </div>
+    <div class="ui bottom attached tab segment active tabItem" data-tab="first">
+        <div class="ui three column grid gridCSE">
+            Loading student's data...
+        </div>
+    </div>
+    <div class="ui bottom attached tab segment tabItem" data-tab="second">
+        <div class="ui three column grid gridBST">
+
+        </div>
+    </div>
+    <div class="ui bottom attached tab segment tabItem" data-tab="third">
+        <div class="ui three column grid gridEEE">
+
+        </div>
+    </div>
+
+
+
+
+
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="lib/semantic.min.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+
+</html>
